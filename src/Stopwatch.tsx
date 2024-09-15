@@ -3,9 +3,8 @@ import * as ReactDOM from "react-dom";
 import { Component, ClassAttributes } from "react";
 
 import Lap from "./Lap";
+import formattedSeconds from "./helpers/formattedSeconds";
 
-const formattedSeconds = (sec: number) =>
-  Math.floor(sec / 60) + ":" + ("0" + (sec % 60)).slice(-2);
 interface StopwatchProps extends ClassAttributes<Stopwatch> {
   initialSeconds: number;
 }
