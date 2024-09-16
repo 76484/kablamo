@@ -50,10 +50,10 @@ class Stopwatch extends Component<StopwatchProps, any> {
 
   handleResetClick() {
     clearInterval(this.incrementer);
-    (this.laps = []),
-      this.setState({
-        secondsElapsed: 0,
-      });
+    this.laps = [];
+    this.setState({
+      secondsElapsed: 0,
+    });
   }
 
   handleLabClick() {
