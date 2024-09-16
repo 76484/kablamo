@@ -11,17 +11,15 @@ interface StopwatchProps extends ClassAttributes<Stopwatch> {
 
 class Stopwatch extends Component<StopwatchProps, any> {
   incrementer: any;
-  laps: any[];
 
   constructor(props: StopwatchProps) {
     super(props);
 
     this.state = {
+      laps: [],
       secondsElapsed: props.initialSeconds,
       lastClearedIncrementer: null,
     };
-
-    this.laps = [];
     this.incrementer = 0;
 
     this.handleDeleteClick = this.handleDeleteClick.bind(this);
@@ -50,23 +48,32 @@ class Stopwatch extends Component<StopwatchProps, any> {
 
   handleResetClick() {
     clearInterval(this.incrementer);
-    this.laps = [];
+
     this.setState({
+      laps: [],
       secondsElapsed: 0,
     });
   }
 
   handleLapClick() {
-    this.laps = this.laps.concat([this.state.secondsElapsed]);
-    this.forceUpdate();
+    this.setState({
+      laps: this.state.laps.concat([this.state.secondsElapsed]),
+    });
   }
 
   handleDeleteClick(index: number) {
-    return () => this.laps.splice(index, 1);
+    return () => {
+      const { laps } = this.state;
+
+      this.setState({
+        laps: laps.slice(0, index).concat(laps.slice(index + 1)),
+      });
+    };
   }
 
   render() {
-    const { secondsElapsed, lastClearedIncrementer } = this.state;
+    const { laps, secondsElapsed, lastClearedIncrementer } = this.state;
+
     return (
       <div className="stopwatch">
         <h1 className="stopwatch-timer">{formattedSeconds(secondsElapsed)}</h1>
@@ -98,7 +105,7 @@ class Stopwatch extends Component<StopwatchProps, any> {
           </button>
         ) : null}
         <div className="stopwatch-laps">
-          {this.laps.map((lap, i) => (
+          {laps.map((lap: number, i: number) => (
             <Lap
               index={i + 1}
               key={lap}

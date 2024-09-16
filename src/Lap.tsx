@@ -4,7 +4,7 @@ import { Component, ClassAttributes } from "react";
 
 import formattedSeconds from "./helpers/formattedSeconds";
 
-const Lap = (props: { index: number; lap: number; onDelete: () => {} }) => (
+const Lap = (props: { index: number; lap: number; onDelete: () => void }) => (
   <div key={props.index} className="stopwatch-lap">
     <strong>{props.index}</strong>/ {formattedSeconds(props.lap)}{" "}
     <button onClick={props.onDelete}> X </button>
