@@ -20,6 +20,7 @@ class Stopwatch extends Component<StopwatchProps, any> {
       lastClearedIncrementer: null,
     };
     this.laps = [];
+    this.incrementer = 0;
   }
 
   handleStartClick() {
