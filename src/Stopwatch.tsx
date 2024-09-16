@@ -15,12 +15,20 @@ class Stopwatch extends Component<StopwatchProps, any> {
 
   constructor(props: StopwatchProps) {
     super(props);
+
     this.state = {
       secondsElapsed: props.initialSeconds,
       lastClearedIncrementer: null,
     };
+
     this.laps = [];
     this.incrementer = 0;
+
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
+    this.handleLabClick = this.handleLabClick.bind(this);
+    this.handleStartClick = this.handleStartClick.bind(this);
+    this.handleStopClick = this.handleStopClick.bind(this);
+    this.handleResetClick = this.handleResetClick.bind(this);
   }
 
   handleStartClick() {
