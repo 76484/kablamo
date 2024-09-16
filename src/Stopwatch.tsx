@@ -99,7 +99,12 @@ class Stopwatch extends Component<StopwatchProps, any> {
         ) : null}
         <div className="stopwatch-laps">
           {this.laps.map((lap, i) => (
-            <Lap index={i + 1} lap={lap} onDelete={this.handleDeleteClick(i)} />
+            <Lap
+              index={i + 1}
+              key={lap}
+              lap={lap}
+              onDelete={this.handleDeleteClick(i)}
+            />
           ))}
         </div>
       </div>
